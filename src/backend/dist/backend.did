@@ -1,0 +1,84 @@
+type http_request_result = 
+ record {
+   body: blob;
+   headers: vec http_header;
+   status: nat;
+ };
+type http_header = 
+ record {
+   name: text;
+   value: text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UploadResult = 
+ variant {
+   err: text;
+   ok: text;
+ };
+type TransformationOutput = 
+ record {
+   body: blob;
+   headers: vec http_header;
+   status: nat;
+ };
+type TransformationInput = 
+ record {
+   context: blob;
+   response: http_request_result;
+ };
+type Timestamp = int;
+type SummaryRecord = 
+ record {
+   customName: text;
+   customerName: text;
+   filename: text;
+   id: nat;
+   source: text;
+   summary: text;
+   timestamp: Timestamp;
+ };
+type SaveCustomerResult = 
+ variant {
+   err: text;
+   ok: CustomerRecord;
+ };
+type RegisterResult = 
+ variant {
+   err: text;
+   ok;
+ };
+type LoginResult = 
+ variant {
+   err: text;
+   ok;
+ };
+type CustomerRecord = 
+ record {
+   id: text;
+   name: text;
+   source: text;
+   timestamp: Timestamp;
+ };
+service : {
+  _initializeAccessControl: () -> ();
+  analyzeFile: (filename: text, content: blob, source: text, customName:
+   text, customerName: text) -> (UploadResult);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  getAllCustomers: () -> (vec CustomerRecord) query;
+  getCallerUserRole: () -> (UserRole) query;
+  getCustomers: (source: text) -> (vec CustomerRecord) query;
+  getSummaries: () -> (vec SummaryRecord) query;
+  getSummariesByCustomer: (customerName: text) -> (vec SummaryRecord) query;
+  getSummariesBySource: (source: text) -> (vec SummaryRecord) query;
+  isCallerAdmin: () -> (bool) query;
+  login: (username: text, password: text) -> (LoginResult);
+  register: (username: text, password: text) -> (RegisterResult);
+  saveCustomer: (name: text, source: text) -> (SaveCustomerResult);
+  transform: (input: TransformationInput) -> (TransformationOutput) query;
+  usernameExists: (username: text) -> (bool) query;
+}

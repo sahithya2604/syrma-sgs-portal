@@ -1,0 +1,22 @@
+{
+  "overview": "Syrma SGS Portal is a company document management portal with AI summarization. It allows teams to manage client and vendor customer records, upload documents linked to specific customers, and search for documents by customer name from the Dashboard.",
+  "features": [
+    "Left sidebar navigation with Dashboard, Client, Vendor, and Upload panels",
+    "Client and Vendor panels for saving customer names with a Save button",
+    "Upload panel with step-by-step flow: choose Client/Vendor, select customer name, upload document",
+    "AI-powered document summarization for uploaded files",
+    "Dashboard search by customer name shows all linked documents",
+    "Login and user registration with persistent sessions",
+    "Per-panel customer name lists with associated documents"
+  ],
+  "category": "document-management",
+  "tags": [
+    "document-management",
+    "ai",
+    "summarization",
+    "portal",
+    "client-vendor",
+    "enterprise"
+  ],
+  "last_updated": "2026-04-15T11:34:32.703Z"
+}
